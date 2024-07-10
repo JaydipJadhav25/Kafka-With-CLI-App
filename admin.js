@@ -1,34 +1,31 @@
-import {kafka} from "./client.js"
+import { kafka } from "./client.js";
 
-async function admin(){
-//create
-const admin  = kafka.admin();
+async function init(){
+ const admin = kafka.admin();
 
-console.log("admin connecting..................")
-await admin.connect()
-console.log("admin connected successfully..................")
+ console.log("admini connecting.....")
 
-await admin.createTopics({
-    topics : [
-        {
-            topic : "rider-update",
-            numPartitions : 2,
-        }
-    ]
-})
+ admin.connect();
+ console.log("admini connection success...")
 
+ console.log(" creating topic ......")
+ await admin.createTopics({
+    topics :[{
+        topic : 'topic-1',
+        numPartitions : 2,
+    },
+]
+ })
 
-
-console.log("admin disconnecting..................")
-
-await admin.disconnect()
-
-console.log("admin disconnected..................")
+ console.log(" created topic success 'rider-update'")
 
 
+ 
 
-
+console.log("admin disconnecting......")
+await admin.disconnect();
+ 
 
 }
 
-admin();
+init();
